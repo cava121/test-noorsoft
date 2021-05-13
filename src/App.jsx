@@ -42,8 +42,9 @@ const App = () => {
   };
 
   const changeRecord = (data) => {
-    debugger;
-    dispatch(changeRecordAPI(data));
+    dispatch(changeRecordAPI(data)).then((response) => {
+      setChange(false);
+    });
   };
 
   return (
@@ -76,6 +77,7 @@ const App = () => {
                     isReadOnly = true;
                   }
                 }
+
                 return (
                   <tr key={record._id}>
                     <th>
@@ -99,7 +101,7 @@ const App = () => {
                     <th>
                       {change._id === record._id ? (
                         <SaveOutlined
-                          onClick={() => changeRecord(record._id, change)}
+                          onClick={() => changeRecord(change)}
                           style={{ cursor: 'pointer' }}
                         />
                       ) : (
